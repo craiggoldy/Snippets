@@ -1,0 +1,27 @@
+/***********************************
+ * COUNTING VALLEYS */
+
+
+function countingValleys(steps, path) {
+    // Write your code here
+
+var array = new Array;
+var valleyCount = 0;
+var elevation = 0;
+for (let i = 0; i < steps; i++){
+    if (path[i] === "D"){
+        array.push(-1);
+    } else array.push(1);
+}
+
+for(let j = 0; j < steps; j++){
+    elevation = elevation + array[j];
+    if( elevation === 0 && array[j] === 1){
+        valleyCount++
+    }
+}
+
+return valleyCount;
+    
+
+}
