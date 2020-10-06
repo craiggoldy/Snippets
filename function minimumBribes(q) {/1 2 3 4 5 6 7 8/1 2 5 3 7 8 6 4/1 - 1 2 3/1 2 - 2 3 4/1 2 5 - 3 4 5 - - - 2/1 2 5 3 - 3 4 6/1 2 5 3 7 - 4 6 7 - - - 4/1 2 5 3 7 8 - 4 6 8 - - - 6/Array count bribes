@@ -1,0 +1,39 @@
+/* How many people have bribed the queue ahead*/
+
+function minimumBribes(q) {
+    // 1 2 3 4 5 6 7 8
+    // 1 2 5 3 7 8 6 4
+    // 1 - 1 2 3
+    // 1 2 - 2 3 4
+    // 1 2 5 - 3 4 5 - - - 2
+    // 1 2 5 3 - 3 4 6
+    // 1 2 5 3 7 - 4 6 7 - - - 4
+    // 1 2 5 3 7 8 - 4 6 8 - - - 6
+    // 1 2 5 3 7 8 6 - 4 6 9 - - - 7
+
+    var totalBribes = 0;
+    var expectedFirst = 1;
+    var expectedSecond = 2;
+    var expectedThird = 3;
+    
+    for ( let i = 0; i < q.length; ++i) {
+        if (q[i] == expectedFirst) {
+            expectedFirst = expectedSecond;
+            expectedSecond = expectedThird;
+            expectedThird++;
+        } else if (q[i] == expectedSecond) {
+            totalBribes++;
+            expectedSecond = expectedThird;
+            expectedThird++;
+        } else if (q[i] == expectedThird) {
+            totalBribes += 2;
+            expectedThird++;
+        } else {
+            totalBribes = -1;;
+            break;
+        }
+    }
+if (totalBribes != -1){
+    console.log(totalBribes);
+} else console.log("Too chaotic");
+}
